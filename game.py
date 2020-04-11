@@ -120,7 +120,7 @@ class Game:
 
         self.message = None
 
-    def _restart(self) -> bool:
+    def _setup_new_game(self) -> bool:
         self.current = self._next_player()
 
         if self.board.status() is GameStatus.WIN:
@@ -142,6 +142,7 @@ class Game:
         self._next_player().mark = Mark.O
         self.message = "New game, let's see who wins this one!"
 
+    def _restart(self) -> bool:
         return input("Enter 999 to play again: ") == "999"
 
     def run(self) -> None:
@@ -167,6 +168,7 @@ class Game:
                 else:
                     self.current = self._next_player()
             
+            self._setup_new_game()
             if not self._restart():
                 break
             
